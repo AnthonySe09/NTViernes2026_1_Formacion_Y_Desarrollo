@@ -1,3 +1,4 @@
 Los quiero muchachos
+Hola Soy Anthony Suarez
 # NTViernes2026_1_Formacion_Y_Desarrollo
 Proyecto Integrador de Nuevas Tecnologias
