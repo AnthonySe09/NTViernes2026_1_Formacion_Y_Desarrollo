@@ -2,23 +2,23 @@ import random
 from datetime import datetime, timedelta 
 
 
-def generar_inscripcion(numeroServicios):
+def generateRegistration(numberRegistrations):
 
-    listaEstado = ["Inscrito", "Por inscribir"]
-    fechaInicio = datetime(2026, 1, 1) 
+    statusList = ["Inscrito", "Por inscribir"]
+    sytartDate = datetime(2026, 1, 1) 
 
     inscripcions = []
 
-    for _ in range(numeroServicios):
+    for _ in range(numberRegistrations):
 
-        fecha = fechaInicio + timedelta(days=random.randint(0, 60)) 
+        date = sytartDate + timedelta(days=random.randint(0, 60)) 
 
         inscripcion = {
             "registrationId": random.randint(0, 100),
             "employeeId": random.randint(0, 100),
             "courseId": random.randint(0, 20),
-            "registrationDate": fecha.strftime("%y/%m/%d"),
-            "status": random.choice(listaEstado),
+            "registrationDate": date.strftime("%y/%m/%d"),
+            "status": random.choice(statusList),
         }
 
         inscripcions.append(inscripcion)
@@ -26,17 +26,17 @@ def generar_inscripcion(numeroServicios):
     return inscripcions  
 
 
-def mostrar_tabla(lista):
+def showTables(list):
 
     headers = ["registrationId", "employeeId", "courseId", "registrationDate", "status"]
 
     print(f"{headers[0]:<15} {headers[1]:<12} {headers[2]:<10} {headers[3]:<18} {headers[4]:<15}")
     print("-" * 70)
 
-    for item in lista:
+    for item in list:
         print(f"{item['registrationId']:<15} {item['employeeId']:<12} {item['courseId']:<10} {item['registrationDate']:<18} {item['status']:<15}")
 
 
 # Uso
-datos = generar_inscripcion(3)
-mostrar_tabla(datos)    
+data = generateRegistration(5)
+showTables(data)    
