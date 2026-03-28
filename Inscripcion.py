@@ -1,32 +1,42 @@
-#simulando datos de una tabla en python  
-
-#solo con los string que tengo en la tabla, tengo que mirar cuales son con string en la tabla
 import random
-from datetime import datetime, timedelta #para generar fechas aleatorias
-
-def generar_inscripciones(numeroIncripciones):
-
-    listaNombres=["Corte de uñas","Operacion de calculos","Cambio e pulmun","inividor","corte de cola"]
-
-    listasCodigos=["AN012","AN233","AN489","AN001","AN777"]
-
-    listaCostos=["25000","3000000","750000","40000","500000"] 
-
-    fechaInicio=datetime(2026,1,1) #fecha de inicio para generar fechas aleatorias
+from datetime import datetime, timedelta 
 
 
-    servicios =[]
+def generar_inscripcion(numeroServicios):
+
+    listaEstado = ["Inscrito", "Por inscribir"]
+    fechaInicio = datetime(2026, 1, 1) 
+
+    inscripcions = []
+
     for _ in range(numeroServicios):
 
-        fecha=fechaInicio+timedelta(days=random.randint(0,60)) #generar una fecha aleatoria dentro de un año
+        fecha = fechaInicio + timedelta(days=random.randint(0, 60)) 
 
-        servicios={
-            "id":random.randint(0,5000),
-            "nombre":random.choice(listaNombres),
-            "codigo":random.choice(listasCodigos),
-            "costo":random.choice(listaCostos),
-            "id_cliente":random.randint(0,100),
-            "fecha":fecha.strftime("%y/%m/%d")
+        inscripcion = {
+            "registrationId": random.randint(0, 100),
+            "employeeId": random.randint(0, 100),
+            "courseId": random.randint(0, 20),
+            "registrationDate": fecha.strftime("%y/%m/%d"),
+            "status": random.choice(listaEstado),
         }
-        servicios.append(servicios)
-    return servicios    
+
+        inscripcions.append(inscripcion)
+
+    return inscripcions  
+
+
+def mostrar_tabla(lista):
+
+    headers = ["registrationId", "employeeId", "courseId", "registrationDate", "status"]
+
+    print(f"{headers[0]:<15} {headers[1]:<12} {headers[2]:<10} {headers[3]:<18} {headers[4]:<15}")
+    print("-" * 70)
+
+    for item in lista:
+        print(f"{item['registrationId']:<15} {item['employeeId']:<12} {item['courseId']:<10} {item['registrationDate']:<18} {item['status']:<15}")
+
+
+# Uso
+datos = generar_inscripcion(3)
+mostrar_tabla(datos)    
