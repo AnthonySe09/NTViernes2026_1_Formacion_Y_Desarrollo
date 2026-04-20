@@ -7,7 +7,7 @@ from notebook.limpiezaEvaluacion import limpiar_evaluacion
 from notebook.limpiezaInscription import limpiar_inscription
 
 evaluations=generar_evaluaciones(1000)
-registrations=generateRegistration(30)
+registrations=generateRegistration(10)
 
 
 # evaluaciones_ordenadas=pd.DataFrame(evaluations)

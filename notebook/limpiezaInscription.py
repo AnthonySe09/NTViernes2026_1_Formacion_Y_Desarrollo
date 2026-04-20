@@ -23,7 +23,7 @@ def limpiar_inscription(data_frame):
     data_frame_limpio["registrationDate"] = pd.to_datetime(data_frame_limpio["registrationDate"])
 
     #reemplazar fechas nulas por una fecha por defecto
-    fecha_defecto = pd.to_datetime("2026-01-01")
+    fecha_defecto = pd.to_datetime("2026/01/01")
     data_frame_limpio["registrationDate"] = data_frame_limpio["registrationDate"].fillna(fecha_defecto)
 
     # eliminar valores invalidos
