@@ -1,3 +1,4 @@
+# Plan de desarrollo realizado por Adriano Jimenez Arboleda
 import random
 from datetime import datetime, timedelta
 
@@ -42,7 +43,7 @@ def generateDevelopmentPlans (planNumbers):
         date = simulatedDate + timedelta(days=random.randint(0,365))
         developmentPlan = {
             "idPlan" : random.randint(1,1000),
-            "startDate" : date.strftime("%y/%m/%d"),
+            "startDate" : date.strftime("%Y/%m/%d"),
             "objective" : random.choice(listObjectives),
             "status" : random.choice (listStatus)
         }
@@ -85,19 +86,19 @@ def generateDevelopmentPlans (planNumbers):
         developmentPlans.append(developmentPlan)
     return developmentPlans
 
-# Esto solo lo utilizo para visualizar si los datos quedaron cargados correctamente antes de realizar la limpieza
-def printDevelopmentPlans(plans):
-    print("\n📋 DEVELOPMENT PLANS\n")
-    print(f"{'ID':<10}{'START DATE':<15}{'STATUS':<15}OBJECTIVE")
-    print("-" * 70)
+# Esto solo lo utilizo para visualizar si los datos quedaron cargados correctamente y dañados antes de realizar la limpieza
+# def printDevelopmentPlans(plans):
+#     print("\n📋 DEVELOPMENT PLANS\n")
+#     print(f"{'ID':<10}{'START DATE':<15}{'STATUS':<15}OBJECTIVE")
+#     print("-" * 70)
 
-    for plan in plans:
-        idPlan = str(plan.get("idPlan"))
-        startDate = str(plan.get("startDate"))
-        status = str(plan.get("status"))
-        objective = str(plan.get("objective"))
+#     for plan in plans:
+#         idPlan = str(plan.get("idPlan"))
+#         startDate = str(plan.get("startDate"))
+#         status = str(plan.get("status"))
+#         objective = str(plan.get("objective"))
 
-        print(f"{idPlan:<10}{startDate:<15}{status:<15}{objective}")
+#         print(f"{idPlan:<10}{startDate:<15}{status:<15}{objective}")
 
-plans = generateDevelopmentPlans(1000)
-printDevelopmentPlans(plans)
+# plans = generateDevelopmentPlans(1000)
+# printDevelopmentPlans(plans)
