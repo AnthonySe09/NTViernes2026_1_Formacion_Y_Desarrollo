@@ -43,3 +43,5 @@ def limpiar_inscription(data_frame):
     data_frame_limpio = data_frame_limpio.drop_duplicates()
 
     return data_frame_limpio
+
+#HOLA
