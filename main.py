@@ -14,6 +14,11 @@ registrations=generateRegistration(10)
 # evaluaciones_ordenadas_limpias=limpiar_evaluacion(evaluaciones_ordenadas)
 # print(evaluaciones_ordenadas_limpias)
 
+
 inscripciones_ordenadas=pd.DataFrame(registrations)
 inscripciones_ordenadas_limpias=limpiar_inscription(inscripciones_ordenadas)
 print(inscripciones_ordenadas_limpias)
+
+
+
+
