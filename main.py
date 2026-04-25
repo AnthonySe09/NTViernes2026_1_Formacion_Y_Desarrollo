@@ -1,7 +1,7 @@
 import pandas as pd
 
-from evaluation import generar_evaluaciones
-from Inscription import generateRegistration
+from utils.evaluation import generar_evaluaciones
+from utils.Inscription import generateRegistration
 
 from notebook.limpiezaEvaluacion import limpiar_evaluacion
 from notebook.limpiezaInscription import limpiar_inscription
@@ -16,13 +16,8 @@ registrations=generateRegistration(10)
 
 
 inscripciones_ordenadas=pd.DataFrame(registrations)
-
-descripcion_inscripciones=limpiar_inscription(inscripciones_ordenadas)
-print(descripcion_inscripciones)
-
-
-
-
+inscripciones_ordenadas_limpias=limpiar_inscription(inscripciones_ordenadas)
+print(inscripciones_ordenadas_limpias)
 
 
 
