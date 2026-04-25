@@ -23,4 +23,6 @@ def describir_fechas(data_frame_limpio):
     print("\n******* fechas********")
     print("******Fechas de inscripcion**********")
     print(f"fecha minima: {data_frame_limpio['registrationDate'].min()}")    
-    print(f"fecha maxima: {data_frame_limpio['registrationDate'].max()}")    
+    print(f"fecha maxima: {data_frame_limpio['registrationDate'].max()}")   
+
+    ##hola ya quedo el codigo de descripcion de inscripcion, saludos. 
