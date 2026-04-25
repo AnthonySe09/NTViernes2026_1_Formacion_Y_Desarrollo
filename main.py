@@ -1,24 +1,54 @@
 import pandas as pd
-
+#IMPORTAR SIMULACIONES
 from utils.evaluation import generar_evaluaciones
 from utils.Inscription import generateRegistration
-
+from utils.DevelopmentPlan import generateDevelopmentPlans
+#ZONA PARA IMPORTAR LIMPIEZAS
 from notebook.limpiezaEvaluacion import limpiar_evaluacion
 from notebook.limpiezaInscription import limpiar_inscription
+from notebook.cleaningDevelopmentPlan import cleanDevelopmentPlan
 
-evaluations=generar_evaluaciones(1000)
+#ZONA PARA IMPORTAR DESCRIPCIOENS
+from notebook.descripcionEvaluacion import describirEstructura, describirEstadisticas, describirCategoricas, describirFechas
+from notebook.describingDevelopmentPlan import describeStructure, describeStatistics, describeCategories, describeDates
+from notebook.descripcion_Inscripcion import describir_estructura, describir_estadisticas, describir_categoricas, describir_fechas
+
+#CREANDO SIMULACIONES
+evaluations=generar_evaluaciones(100)
 registrations=generateRegistration(10)
+developmentPlans=generateDevelopmentPlans(10)
 
-
-# evaluaciones_ordenadas=pd.DataFrame(evaluations)
-# evaluaciones_ordenadas_limpias=limpiar_evaluacion(evaluaciones_ordenadas)
-# print(evaluaciones_ordenadas_limpias)
+#CREANDO LIMPIEZA DE DATOS
+evaluaciones_ordenadas=pd.DataFrame(evaluations)
+evaluaciones_ordenadas_limpias=limpiar_evaluacion(evaluaciones_ordenadas)
+print(evaluaciones_ordenadas_limpias)
 
 
 inscripciones_ordenadas=pd.DataFrame(registrations)
 inscripciones_ordenadas_limpias=limpiar_inscription(inscripciones_ordenadas)
 print(inscripciones_ordenadas_limpias)
 
+
+planDesarrollo_ordenadas = pd.DataFrame(developmentPlans)  
+planDesarrollo_ordenadas_limpias = cleanDevelopmentPlan(planDesarrollo_ordenadas)  # limpiar
+print(planDesarrollo_ordenadas_limpias)
+
+#DESCRIBIENDO EL SET DE DATOS 
+
+describirEstructura(evaluaciones_ordenadas_limpias)
+describirEstadisticas(evaluaciones_ordenadas_limpias)
+describirCategoricas(evaluaciones_ordenadas_limpias)
+describirFechas(evaluaciones_ordenadas_limpias)
+
+describeStructure(planDesarrollo_ordenadas_limpias)
+describeStatistics(planDesarrollo_ordenadas_limpias)
+describeCategories(planDesarrollo_ordenadas_limpias)
+describeDates(planDesarrollo_ordenadas_limpias)
+
+describir_estructura(inscripciones_ordenadas_limpias)
+describir_estadisticas(inscripciones_ordenadas_limpias)
+describir_categoricas(inscripciones_ordenadas_limpias)
+describir_fechas(inscripciones_ordenadas_limpias)
 
 
 

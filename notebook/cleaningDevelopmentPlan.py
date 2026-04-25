@@ -1,6 +1,6 @@
 # Limpieza de plan de desarrollo realizada por Adriano Jimenez Arboleda
 import pandas as pd
-from DevelopmentPlan import listObjectives, listStatus
+from utils.DevelopmentPlan import listObjectives, listStatus
 # definir funcion de limpieza
 def cleanDevelopmentPlan (dataFrame):
 
