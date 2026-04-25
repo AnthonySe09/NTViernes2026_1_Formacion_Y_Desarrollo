@@ -1,19 +1,35 @@
 import pandas as pd
-
+#IMPORTAR SIMULACIONES
 from utils.evaluation import generar_evaluaciones
 from utils.Inscription import generateRegistration
-
+from utils.DevelopmentPlan import generateDevelopmentPlans
+#ZONA PARA IMPORTAR LIMPIEZAS
 from notebook.limpiezaEvaluacion import limpiar_evaluacion
 from notebook.limpiezaInscription import limpiar_inscription
+from notebook.cleaningDevelopmentPlan import cleanDevelopmentPlan
 
-evaluations=generar_evaluaciones(1000)
+#ZONA PARA IMPORTAR DESCRIPCIOENS
+from notebook.descripcionEvaluacion import describirEstructura, describirEstadisticas, describirCategoricas, describirFechas
+
+#CREANDO SIMULACIONES
+evaluations=generar_evaluaciones(100)
 registrations=generateRegistration(10)
 
 
-# evaluaciones_ordenadas=pd.DataFrame(evaluations)
-# evaluaciones_ordenadas_limpias=limpiar_evaluacion(evaluaciones_ordenadas)
-# print(evaluaciones_ordenadas_limpias)
+#CREANDO LIMPIEZA DE DATOS
+evaluaciones_ordenadas=pd.DataFrame(evaluations)
+evaluaciones_ordenadas_limpias=limpiar_evaluacion(evaluaciones_ordenadas)
+print(evaluaciones_ordenadas_limpias)
 
 inscripciones_ordenadas=pd.DataFrame(registrations)
 inscripciones_ordenadas_limpias=limpiar_inscription(inscripciones_ordenadas)
 print(inscripciones_ordenadas_limpias)
+
+
+#DESCRIBIENDO EL SET DE DATOS 
+
+describirEstructura(evaluaciones_ordenadas_limpias)
+describirEstadisticas(evaluaciones_ordenadas_limpias)
+describirCategoricas(evaluaciones_ordenadas_limpias)
+describirFechas(evaluaciones_ordenadas_limpias)
+
