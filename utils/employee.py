@@ -21,6 +21,7 @@ def generar_empleados(numeroEmpleados):
         fecha=listaFechaContratacion + timedelta(days=random.randint(0, 1800))
         
         empleado = {
+            "id":random.randint(0,200),
             "nombre": random.choice(listaNombres),
             "apellido": random.choice(listaApellidos),
             "fecha_contratacion": fecha.strftime("%Y-%m-%d"),
@@ -30,12 +31,20 @@ def generar_empleados(numeroEmpleados):
             "tipo_contrato": random.choice(listaTipoContrato),
             "nivel_educativo": random.choice(listaNivelEducativo)
         }
+        
+        # Inyectando errores controlados
+        probabilidadError = random.random()
+        if probabilidadError < 0.1:
+            empleado["nombre"] = " " + empleado["nombre"] + " "
+        elif probabilidadError < 0.2:
+            empleado["apellido"] = empleado["apellido"].lower()
+        elif probabilidadError < 0.3:
+            empleado["fecha_contratacion"] = fecha.strftime("%Y/%m/%d")
+        elif probabilidadError < 0.4:
+            empleado["departamento"] = None
+        elif probabilidadError < 0.5:
+            empleado["tipo_contrato"] = ""
+            
+    
         empleados.append(empleado)
-    return empleados
-
-    
-    
-    
-    
-    
-    
+    return empleados    
