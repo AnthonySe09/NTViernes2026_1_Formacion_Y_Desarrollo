@@ -44,4 +44,3 @@ def limpiar_inscription(data_frame):
 
     return data_frame_limpio
 
-#HOLA
