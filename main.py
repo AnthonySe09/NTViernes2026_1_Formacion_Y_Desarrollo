@@ -17,6 +17,10 @@ from notebook.describingDevelopmentPlan import describeStructure, describeStatis
 from notebook.descripcion_Inscripcion import describir_estructura, describir_estadisticas, describir_categoricas, describir_fechas
 #from notebook.descripcionEmployee import describir_estructura, describir_estadisticas, describir_categoricas, describir_fechas
 
+#IMPORTAR TRANSFORMACIONES
+from notebook.transformacionEvaluacion import transformar_datos_evaluacion
+from notebook.trasnformacionInscripcion import transformar_datos_inscripciones
+
 #CREANDO SIMULACIONES
 evaluations=generar_evaluaciones(100)
 registrations=generateRegistration(10)
@@ -63,3 +67,56 @@ describir_fechas(inscripciones_ordenadas_limpias)
 #describir_estadisticas(empleados_ordenadas_limpias)
 #describir_categoricas(empleados_ordenadas_limpias)
 #describir_fechas(empleados_ordenadas_limpias)
+
+# TRANSFORMACIONES
+print("\n" + "="*80)
+print("TRANSFORMACIÓN DE EVALUACIONES")
+print("="*80)
+
+transformacion_evaluaciones = transformar_datos_evaluacion(evaluaciones_ordenadas_limpias)
+
+print("\nFiltro 1 - Scores inválidos (fuera del rango 0-5):")
+print(transformacion_evaluaciones["filtro_1"])
+print("\nAgrupación por tipo de evaluación:")
+print(transformacion_evaluaciones["agrupacion_1"])
+
+print("\nFiltro 2 - Comentarios vacíos:")
+print(transformacion_evaluaciones["filtro_2"])
+print("\nAgrupación de comentarios vacíos:")
+print(transformacion_evaluaciones["agrupacion_2"])
+
+print("\nFiltro 3 - EmpleadoIDs no numéricos:")
+print(transformacion_evaluaciones["filtro_3"])
+print("\nAgrupación de IDs erróneos por curso:")
+print(transformacion_evaluaciones["agrupacion_3"])
+
+print("\nFiltro 4 - Tipos de evaluación inválidos:")
+print(transformacion_evaluaciones["filtro_4"])
+print("\nAgrupación de tipos inválidos:")
+print(transformacion_evaluaciones["agrupacion_4"])
+
+print("\nFiltro 5 - Fechas erróneas:")
+print(transformacion_evaluaciones["filtro_5"])
+print("\nAgrupación de fechas erróneas por curso:")
+print(transformacion_evaluaciones["agrupacion_5"])
+
+print("\n" + "="*80)
+print("TRANSFORMACIÓN DE INSCRIPCIONES")
+print("="*80)
+
+transformacion_inscripciones = transformar_datos_inscripciones(inscripciones_ordenadas_limpias)
+
+print("\nAprobados por curso:")
+print(transformacion_inscripciones["aprobados_por_curso"])
+
+print("\nCursos con ID mayor a 10 - Inscripciones por estado:")
+print(transformacion_inscripciones["cursos_mayores_10"])
+
+print("\nEmpleados con ID menor a 50 - Cantidad de registros:")
+print(transformacion_inscripciones["empleados_menores_50"])
+
+print("\nInscripciones pendientes por fecha:")
+print(transformacion_inscripciones["pendientes_por_fecha"])
+
+print("\nInscripciones rechazadas - Empleados únicos por curso:")
+print(transformacion_inscripciones["rechazados_por_curso"])
