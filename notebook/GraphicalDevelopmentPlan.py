@@ -1,16 +1,32 @@
 # Rutina de graficacion para planes de desarrollo
 # Realizado por Adriano Jimenez Arboleda
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas as pd
 import os
 
-# Ruta de la carpeta assets en un proyecto React con Vite
-RUTA_ASSETS = os.path.join(os.path.dirname(__file__), "..", "..", "mi-app-react", "src", "assets", "graficos")
+# Ruta de la carpeta public del frontend
+RUTA_ASSETS = os.path.join(
+    os.path.dirname(__file__), "..", "..", "hrm-system-front", "public", "graficos"
+)
+RUTA_CSV_BACKEND = os.path.join(
+    os.path.dirname(__file__), "..", "..", "hrm-system-borrador", "training", "analytics-data"
+)
 
 
 def crear_ruta_si_no_existe(ruta_destino):
     # Se crea la carpeta destino en caso de que aún no exista
     os.makedirs(ruta_destino, exist_ok=True)
+
+
+def exportar_csv(dataframe, nombre_archivo, ruta_destino=RUTA_CSV_BACKEND):
+    crear_ruta_si_no_existe(ruta_destino)
+    ruta_csv = os.path.join(ruta_destino, nombre_archivo)
+    dataframe.to_csv(ruta_csv, index=False, encoding="utf-8")
+    print(f"CSV guardado en: {ruta_csv}")
+    return ruta_csv
 
 
 def graficar_planes_completados_por_mes(grouping1, ruta_destino=RUTA_ASSETS):
@@ -19,6 +35,10 @@ def graficar_planes_completados_por_mes(grouping1, ruta_destino=RUTA_ASSETS):
     # Columnas esperadas: yearMonth, planCount
 
     crear_ruta_si_no_existe(ruta_destino)
+
+    if grouping1.empty:
+        print("Sin datos para graficar planes completados por mes.")
+        return
 
     # Convertir Period a string para que matplotlib pueda graficarlo
     datos = grouping1.copy()
@@ -46,6 +66,7 @@ def graficar_planes_completados_por_mes(grouping1, ruta_destino=RUTA_ASSETS):
     figura.savefig(ruta_completa)
     plt.close(figura)
     print(f"Gráfico 1 guardado en: {ruta_completa}")
+    exportar_csv(datos, "g1_planes_completados_por_mes.csv")
 
 
 def graficar_objetivos_mas_comunes(grouping2, ruta_destino=RUTA_ASSETS):
@@ -54,6 +75,10 @@ def graficar_objetivos_mas_comunes(grouping2, ruta_destino=RUTA_ASSETS):
     # Columnas esperadas: objective, count
 
     crear_ruta_si_no_existe(ruta_destino)
+
+    if grouping2.empty:
+        print("Sin datos para graficar objetivos mas comunes.")
+        return
 
     figura, area_dibujo = plt.subplots(figsize=(14, 6))
 
@@ -74,6 +99,7 @@ def graficar_objetivos_mas_comunes(grouping2, ruta_destino=RUTA_ASSETS):
     figura.savefig(ruta_completa)
     plt.close(figura)
     print(f"Gráfico 2 guardado en: {ruta_completa}")
+    exportar_csv(grouping2, "g2_objetivos_mas_comunes.csv")
 
 
 def graficar_objetivos_con_problemas(grouping3, ruta_destino=RUTA_ASSETS):
@@ -83,13 +109,17 @@ def graficar_objetivos_con_problemas(grouping3, ruta_destino=RUTA_ASSETS):
 
     crear_ruta_si_no_existe(ruta_destino)
 
+    if grouping3.empty:
+        print("Sin datos para graficar objetivos con problemas.")
+        return
+
     tabla_pivote = grouping3.pivot_table(
         index="objective",
         columns="status",
         values="count",
         aggfunc="sum",
         fill_value=0
-    )
+    ).astype(float)
 
     figura, area_dibujo = plt.subplots(figsize=(12, 6))
 
@@ -111,6 +141,7 @@ def graficar_objetivos_con_problemas(grouping3, ruta_destino=RUTA_ASSETS):
     figura.savefig(ruta_completa)
     plt.close(figura)
     print(f"Gráfico 3 guardado en: {ruta_completa}")
+    exportar_csv(grouping3, "g3_objetivos_con_problemas.csv")
 
 
 def graficar_planes_por_mes(grouping4, ruta_destino=RUTA_ASSETS):
@@ -119,6 +150,10 @@ def graficar_planes_por_mes(grouping4, ruta_destino=RUTA_ASSETS):
     # Columnas esperadas: month, planCount
 
     crear_ruta_si_no_existe(ruta_destino)
+
+    if grouping4.empty:
+        print("Sin datos para graficar planes por mes.")
+        return
 
     datos = grouping4.sort_values("month")
 
@@ -141,6 +176,7 @@ def graficar_planes_por_mes(grouping4, ruta_destino=RUTA_ASSETS):
     figura.savefig(ruta_completa)
     plt.close(figura)
     print(f"Gráfico 4 guardado en: {ruta_completa}")
+    exportar_csv(grouping4, "g4_planes_por_mes.csv")
 
 
 def graficar_mapa_calor_objetivo_estado(grouping5, ruta_destino=RUTA_ASSETS):
@@ -150,13 +186,17 @@ def graficar_mapa_calor_objetivo_estado(grouping5, ruta_destino=RUTA_ASSETS):
 
     crear_ruta_si_no_existe(ruta_destino)
 
+    if grouping5.empty:
+        print("Sin datos para graficar mapa de calor objetivo-estado.")
+        return
+
     tabla_pivote = grouping5.pivot_table(
         index="objective",
         columns="status",
         values="count",
         aggfunc="sum",
         fill_value=0
-    )
+    ).astype(float)
 
     figura, area_dibujo = plt.subplots(figsize=(12, 8))
 
@@ -178,6 +218,7 @@ def graficar_mapa_calor_objetivo_estado(grouping5, ruta_destino=RUTA_ASSETS):
     figura.savefig(ruta_completa)
     plt.close(figura)
     print(f"Gráfico 5 guardado en: {ruta_completa}")
+    exportar_csv(grouping5, "g5_mapa_calor_objetivo_estado.csv")
 
 
 def graficar_tasa_completitud(grouping6, ruta_destino=RUTA_ASSETS):
@@ -187,17 +228,24 @@ def graficar_tasa_completitud(grouping6, ruta_destino=RUTA_ASSETS):
 
     crear_ruta_si_no_existe(ruta_destino)
 
+    if grouping6.empty:
+        print("Sin datos para graficar tasa de completitud.")
+        return
+
+    datos = grouping6.copy()
+    datos["completionPct"] = pd.to_numeric(datos["completionPct"], errors="coerce").fillna(0.0)
+
     figura, area_dibujo = plt.subplots(figsize=(14, 6))
 
     barras = area_dibujo.barh(
-        grouping6["objective"],
-        grouping6["completionPct"],
+        datos["objective"],
+        datos["completionPct"],
         color="#9C27B0",
         edgecolor="black"
     )
 
     # Agregar etiquetas de porcentaje al final de cada barra
-    for barra, valor in zip(barras, grouping6["completionPct"]):
+    for barra, valor in zip(barras, datos["completionPct"]):
         area_dibujo.text(
             valor + 0.5,
             barra.get_y() + barra.get_height() / 2,
@@ -216,6 +264,7 @@ def graficar_tasa_completitud(grouping6, ruta_destino=RUTA_ASSETS):
     figura.savefig(ruta_completa)
     plt.close(figura)
     print(f"Gráfico 6 guardado en: {ruta_completa}")
+    exportar_csv(grouping6, "g6_tasa_completitud_por_objetivo.csv")
 
 
 def graficar_todos(groupedDevelopmentPlans, ruta_destino=RUTA_ASSETS):

@@ -9,7 +9,7 @@ def limpiar_inscription(data_frame):
         data_frame_limpio[columna] = data_frame_limpio[columna].astype("string").str.strip()
 
     #definir valores esperados
-    status_validos = ["Inscrito", "Por inscribir"]
+    status_validos = ["Inscrito", "Por inscribir", "Aprobado", "Pendiente", "Rechazado"]
     data_frame_limpio ["status"] = data_frame_limpio["status"].where(data_frame_limpio["status"].isin(status_validos), pd.NA) 
 
     #convertir columnas numericas

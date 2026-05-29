@@ -5,14 +5,14 @@ from datetime import datetime, timedelta
 
 def generateRegistration(numberRegistrations):
 
-    statusList = ["Inscrito", "Por inscribir"]
-    sytartDate = datetime(2026, 1, 1) 
+    statusList = ["Inscrito", "Por inscribir", "Aprobado", "Pendiente", "Rechazado"]
+    sytartDate = datetime(2026, 1, 1)
 
     inscripcions = []
 
     for _ in range(numberRegistrations):
 
-        date = sytartDate + timedelta(days=random.randint(0, 60)) 
+        date = sytartDate + timedelta(days=random.randint(0, 60))
 
         inscripcion = {
             "registrationId": random.randint(0, 100),
