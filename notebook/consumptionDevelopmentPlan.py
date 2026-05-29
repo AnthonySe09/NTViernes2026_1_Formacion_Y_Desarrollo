@@ -1,5 +1,4 @@
 import requests
-
 def consume_development_plans():
     url = "http://localhost:8080/api/development-plans"
     response = requests.get(url)
